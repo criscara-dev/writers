@@ -1,15 +1,34 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {BrowserRouter, Switch, Route } from "react-router-dom"
 
-const TestComponent = () => {
+// My component
+import Header from './components/Header'
+import HomeGuest from './components/HomeGuest'
+import Footer from './components/Footer'
+import About from './components/About'
+import Terms from './components/Terms'
+
+const Main = () => {
     return (
-        <>
-        <h1>Hello World!!!</h1>
-        <p>and the sky is blue!!!</p>
-        </>
+        <BrowserRouter>
+        <Header />
+        <Switch>
+            <Route path="/" exact>
+                <HomeGuest />
+            </Route>
+            <Route path="/about-us" exact>
+                <About />
+            </Route>
+            <Route path="/terms" exact>
+                <Terms />
+            </Route>
+        </Switch>
+        <Footer/>
+        </BrowserRouter>
     )
 }
 
-ReactDOM.render(<TestComponent />, document.querySelector("#app"))
+ReactDOM.render(<Main />, document.querySelector("#app"))
 
 if (module.hot) {module.hot.accept()}
