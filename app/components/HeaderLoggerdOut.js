@@ -11,7 +11,13 @@ function HeaderLoggedOut(props) {
     const response = await Axios.post('http://localhost:8080/login', { username, password })
     // once I don't need anymore the log, I can use below instead of if statement
     // response.data ? props.setLoggedIn(true) : console.log('Incorrect username / password')
-    if (response.data) { console.log(response.data); props.setLoggedIn(true)
+    if (response.data) { 
+      // console.log(response.data); 
+      localStorage.setItem("complexAppToken",response.data.token)
+      localStorage.setItem("complexAppUsername",response.data.username)
+      localStorage.setItem("complexAppAvatar",response.data.avatar)
+
+      props.setLoggedIn(true)
     } else {
       console.log('Incorrect username / password')
       }
