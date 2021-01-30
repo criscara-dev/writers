@@ -8,7 +8,7 @@ function HeaderLoggedOut(props) {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-    const response = await Axios.post('http://localhost:8080/login', { username, password })
+    const response = await Axios.post('/login', { username, password })
     // once I don't need anymore the log, I can use below instead of if statement
     // response.data ? props.setLoggedIn(true) : console.log('Incorrect username / password')
     if (response.data) { 
