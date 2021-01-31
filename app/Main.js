@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter, Switch, Route } from "react-router-dom"
 import Axios from "axios"
+import FlashMessages from "./components/FlashMessages"
 
 // My components
 import Header from './components/Header'
@@ -18,9 +19,14 @@ Axios.defaults.baseURL = 'http://localhost:8080'
 
 const Main = () => {
     const [loggedIn,setLoggedIn] = useState(Boolean=(localStorage.getItem("complexAppToken")))
+    const [flashMessages, setFlashMessages] = useState([])
+    const addFlashMessage =(msg)=>{
+        setFlashMessages(prev => prev.concat(msg))
+    }
 
     return (
         <BrowserRouter>
+        <FlashMessages messages={flashMessages} />
         <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         <Switch>
             <Route path="/" exact>
@@ -30,7 +36,7 @@ const Main = () => {
                 <ViewSinglePost />
             </Route>
             <Route path="/create-post">
-                <CreatePost />
+                <CreatePost addFlashMessage={addFlashMessage} />
             </Route>
             <Route path="/about-us" exact>
                 <About />
